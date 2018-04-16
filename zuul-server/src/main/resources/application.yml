@@ -1,0 +1,34 @@
+server:
+  port: 9090
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+  instance:
+     preferIpAddress: false
+     hostname: localhost
+
+
+zuul:
+  #Service will be mapped under the /api URI
+  prefix: /api
+#  Uncomment to disable auto-registering all services read from Eureka
+#  ignoredServices: '*'
+
+  routes:
+    a:
+      path: /a/**
+      serviceId: microserviceA
+    b:
+      path: /b/**
+      serviceId: microserviceB
+    c:
+      path: /c/**
+      serviceId: microserviceC
+
+
+
+spring:
+  application:
+    name: zuul-server
